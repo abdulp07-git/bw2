@@ -82,7 +82,8 @@ resource "azurerm_linux_virtual_machine" "bwnginxvm" {
 
   admin_ssh_key {
     username = "azureuser"
-    public_key = file("~/.ssh/gatewayKey.pub")
+    public_key = file("./gatewayKey.pem")
+    
   }
 
   os_disk {

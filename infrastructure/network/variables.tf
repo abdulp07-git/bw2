@@ -52,3 +52,6 @@ variable "security-rule" {
     name = "allow-kibana", priority = 1004, destination_port = "5601"
   } ]
 }
+
+
+variable "ssh_public_key" {}
