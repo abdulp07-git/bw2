@@ -54,4 +54,3 @@ variable "security-rule" {
 }
 
 
-variable "ssh_public_key" {}

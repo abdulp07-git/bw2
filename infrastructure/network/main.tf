@@ -71,6 +71,7 @@ resource "azurerm_network_interface_security_group_association" "bw_nic_nsg_asso
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+variable "ssh_public_key" {}
 
 resource "azurerm_linux_virtual_machine" "bwnginxvm" {
   name = "bwnginxvm"
@@ -82,7 +83,8 @@ resource "azurerm_linux_virtual_machine" "bwnginxvm" {
 
   admin_ssh_key {
     username = "azureuser"
-    public_key = file("infrastructure/network/gatewayKey.pem")
+    #public_key = file("infrastructure/network/gatewayKey.pem")
+    public_key = var.ssh_public_key
     
   }
 
