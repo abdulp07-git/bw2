@@ -54,3 +54,7 @@ variable "security-rule" {
 }
 
 
+variable "ssh-key" {
+  type = string
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCr1wa6fD/FWd2AG9IflJXq4TbYnD0fUt629Wd2GmTmclYP1ijUT6xAhaFp2NK4h5fs96zJTD3koKI0Fxe39V+aReVy9bmS3TvYan4jlimJ6cLbhnVRTkHpI3cTEP9iXmA7jpiQnmkVtsSLiDKr2/ZXwNEEdksNJ8pVXVSLnzPs2unOaPjMVYR+nWSi8ldtNzRT8q6GrFcd/H8c+w0poDweIpzZX0kvoJk0Dlab2Nrzdl30abq/P9M5VEDR5uGKADBqj58kPBq+ymTC/PLJR2XFSIKhC5wGca7l6KiqkQyDStquae4CTRSSwvhj36s+MrZBPoDHqGDgoQ55HPhjg4AkPkmdEh9XrAL+VWkNMIPdTMaj1rbCxPeVrmBDiIfHbHMrsadlEaeVyOypP/ILz7h0iULt1fosesZyC4XjseAnB6nxRTrpCDmTUVi/E43FDaxcN+Ud+d32hkLPHHnfo5cdeFMS/f5W35/R7W8VQ9EBOjgGWLbXdIxgQ1WE48ITzIE="
+}
