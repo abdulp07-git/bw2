@@ -30,6 +30,7 @@ kubectl get namespace staging || kubectl create namespace staging
 
 # Apply deployment files
 kubectl apply -f aks-files/maven-app/maven.yml -n staging
+                                                                                                                                                    
 EOF
 """
                     }

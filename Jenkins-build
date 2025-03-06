@@ -138,7 +138,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    sed -i "s|image: bw89acr.azurecr.io/maven:latest|image: bw89acr.azurecr.io/maven:v${BUILD_NUMBER}|" aks-files/maven-app/maven.yml
+                    sed -i "s|image: bw89acr.azurecr.io/maven:latest|image: bw89acr.azurecr.io/bw2:v${BUILD_NUMBER}|" aks-files/maven-app/maven.yml
                     """
                 }
             }
