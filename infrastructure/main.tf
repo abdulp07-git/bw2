@@ -26,4 +26,5 @@ module "aks" {
   location = module.network.location
   vnet-name = module.network.vnet-name
   subnet_id = module.network.subnet-id
+  vnet-id = module.network.vnet-id
 }

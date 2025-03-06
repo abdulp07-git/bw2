@@ -335,6 +335,10 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
+# Remove annottation for public load balanacer
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "subnet-aks"  
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx

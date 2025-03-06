@@ -58,8 +58,17 @@ resource "azurerm_kubernetes_cluster_node_pool" "worker" {
 
 }
 
+
+# Assign AcrPull role to AKS kubelet identity
 resource "azurerm_role_assignment" "acrpull" {
   scope = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
   principal_id = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+}
+
+# Assign Network Contributor role to AKS system-assigned identity
+resource "azurerm_role_assignment" "network_contributor" {
+  scope                = var.vnet-id   # Ensure you pass the correct VNet ID as a variable
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_kubernetes_cluster.aks.identity[0].principal_id
 }
