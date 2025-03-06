@@ -45,7 +45,7 @@ pipeline {
 
                         // Extract VM Public IP and assign it to REMOTE_HOST
                         def vmIp = sh(
-                            script: "terraform -chdir=infrastructure output -raw module.network.vm_public_ip",
+                            script: "terraform -chdir=infrastructure output -raw vmip",
                             returnStdout: true
                         ).trim()
 
