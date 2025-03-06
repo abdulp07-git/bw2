@@ -28,6 +28,16 @@ variable "subnetiprange" {
   default = "10.0.1.0/24"
 }
 
+variable "subnetname2" {
+  type = string
+  default = "subnet-gateway"
+}
+
+variable "subnetgatewayrange" {
+  type = string
+  default = "10.0.2.0/24"
+}
+
 variable "security-rule" {
   type = list(object({
     name = string

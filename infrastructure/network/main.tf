@@ -18,6 +18,13 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes = [var.subnetiprange]
 }
 
+resource "azurerm_subnet" "subnet2" {
+  name = var.subnetname2
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes = [var.subnetgatewayrange]
+}
+
 resource "azurerm_network_security_group" "nsg" {
   name = "bw-nsg"
   location = azurerm_resource_group.rg.location
@@ -65,6 +72,14 @@ resource "azurerm_subnet_network_security_group_association" "bw_subnet_nsg_asso
   subnet_id = azurerm_subnet.subnet.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
+
+
+resource "azurerm_subnet_network_security_group_association" "bw_subnet_nsg_association2" {
+  subnet_id = azurerm_subnet.subnet2.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
+
+
 
 resource "azurerm_network_interface_security_group_association" "bw_nic_nsg_association" {
   network_interface_id = azurerm_network_interface.bw_nic.id
