@@ -55,11 +55,14 @@ variable "security-rule" {
     name = "allow-https", priority = 1002, destination_port = "443"
   },
   {
-    name = "allow-maven", priority = 1003, destination_port = "8080"
+    name = "allow-https", priority = 1003, destination_port = "65200-65535"
+  },
+  {
+    name = "allow-maven", priority = 1004, destination_port = "8080"
   },
   
   {
-    name = "allow-kibana", priority = 1004, destination_port = "5601"
+    name = "allow-kibana", priority = 1005, destination_port = "5601"
   } ]
 }
 
