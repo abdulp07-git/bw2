@@ -15,23 +15,26 @@ pipeline {
 
 
     stages {
-        stage ("Deployment using gateway server"){
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')]){
-                    sh """
-                    ssh -i $SSH_KEY -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << EOF
-                        echo "Running commands on remote VM"
-                    az login --service-principal -u $AZURE_USER -p $AZURE_SECRET --tenant $AZURE_TENANT
-                    
-                    az aks get-credentials --resource-group bw89rg --name bwaks --overwrite-existing
-                    kubectl create namespace staging
-                    kubectl apply -f aks-files/maven-app/maven.yml -n staging
+            stage ("Deployment using gateway server") {
+                steps {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')]) {
+                        sh """
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+                            echo "Running commands on remote VM"
 
+                            az login --service-principal -u $AZURE_USER -p $AZURE_SECRET --tenant $AZURE_TENANT
+                            az aks get-credentials --resource-group bw89rg --name bwaks --overwrite-existing
 
-                    EOF
-                    """
+                            # Create namespace only if it doesn't exist
+                            kubectl get namespace staging || kubectl create namespace staging
+
+                            # Apply deployment files
+                            kubectl apply -f aks-files/maven-app/maven.yml -n staging
+                        EOF
+                        """
+                    }
                 }
             }
         }
-    }
+
 }
