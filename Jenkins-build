@@ -162,15 +162,13 @@ pipeline {
         
     } //stages finshed
 
-    post {
-        success {
-            build job: 'bw2-aks-deploy',
-                wait: false,
-                parameters: [
-                    string(name: 'REMOTE_HOST', value: env.REMOTE_HOST)
-                ]
-        }
-    }
+    //post {
+    //    success {
+    //        build job: 'bw2-aks-deploy',
+    //            wait: false,
+    
+       // }
+    //}
 
 }
 
