@@ -21,3 +21,7 @@ output "vnet-id" {
 output "subnet-id" {
   value = azurerm_subnet.subnet.id
 }
+
+output "subnet-gateway" {
+  value = azurerm_subnet.subnet2.id
+}
