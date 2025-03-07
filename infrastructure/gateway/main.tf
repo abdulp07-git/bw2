@@ -34,11 +34,24 @@ resource "azurerm_application_gateway" "app-gway" {
   }
 
   backend_http_settings {
-    name = "http-settings"
+    name = "http-settings-intodepth"
     cookie_based_affinity = "Disabled"
     port = 80
     protocol = "Http"
     request_timeout = 30
+    host_name = "intodepth.com"  # 👈 Ensures correct routing
+    #pick_host_name_from_backend_address = true  # 👈 Automatically picks host from ingress rules
+  }
+
+
+    backend_http_settings {
+    name = "http-settings-grafana"
+    cookie_based_affinity = "Disabled"
+    port = 80
+    protocol = "Http"
+    request_timeout = 30
+    host_name = "grafana.intodepth.com"  # 👈 Ensures correct routing
+    #pick_host_name_from_backend_address = true  # 👈 Automatically picks host from ingress rules
   }
 
   http_listener {
@@ -68,7 +81,7 @@ resource "azurerm_application_gateway" "app-gway" {
     priority = 100
     http_listener_name = "listener-intodepth"
     backend_address_pool_name = "appgw-backend-pool"
-    backend_http_settings_name = "http-settings"
+    backend_http_settings_name = "http-settings-intodepth"
   }
 
   request_routing_rule {
@@ -77,6 +90,6 @@ resource "azurerm_application_gateway" "app-gway" {
     priority = 110
     http_listener_name = "listener-grafana"
     backend_address_pool_name = "appgw-backend-pool"
-    backend_http_settings_name = "http-settings"
+    backend_http_settings_name = "http-settings-grafana"
   }
 }
