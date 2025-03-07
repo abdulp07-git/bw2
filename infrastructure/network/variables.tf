@@ -66,6 +66,9 @@ variable "security-rule" {
   },
   {
     name = "allow-grafana", priority = 1006, destination_port = "3000"
+  },
+  {
+    name = "allow-django", priority = 1007, destination_port = "8000"
   } ]
 }
 
