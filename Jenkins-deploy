@@ -37,7 +37,7 @@ kubectl get namespace staging || kubectl create namespace staging
 kubectl apply -f aks-files/maven-app/maven.yml -n staging
 
 #install prometheus grafana
-helm upgrade kube-prometheus-stack aks-files/helm-charts/kube-prometheus-stack -n staging
+helm install kube-prometheus-stack aks-files/helm-charts/kube-prometheus-stack -n staging
 
 sleep 30
 
