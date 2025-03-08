@@ -54,6 +54,17 @@ resource "azurerm_application_gateway" "app-gway" {
     #pick_host_name_from_backend_address = true  # 👈 Automatically picks host from ingress rules
   }
 
+
+    backend_http_settings {
+    name = "http-settings-django"
+    cookie_based_affinity = "Disabled"
+    port = 80
+    protocol = "Http"
+    request_timeout = 30
+    host_name = "django.intodepth.com"  # 👈 Ensures correct routing
+    #pick_host_name_from_backend_address = true  # 👈 Automatically picks host from ingress rules
+  }
+
   http_listener {
     name = "listener-intodepth"
     frontend_ip_configuration_name = "appgw-frontend-ip"
@@ -69,6 +80,15 @@ resource "azurerm_application_gateway" "app-gway" {
     protocol = "Http"
     host_name = "grafana.intodepth.com"
   }
+
+  http_listener {
+    name = "listener-django"
+    frontend_ip_configuration_name = "appgw-frontend-ip"
+    frontend_port_name = "http-port"
+    protocol = "Http"
+    host_name = "django.intodepth.com"
+  }
+
 
   frontend_port {
     name = "http-port"
@@ -91,5 +111,14 @@ resource "azurerm_application_gateway" "app-gway" {
     http_listener_name = "listener-grafana"
     backend_address_pool_name = "appgw-backend-pool"
     backend_http_settings_name = "http-settings-grafana"
+  }
+
+  request_routing_rule {
+    name = "rule-django"
+    rule_type = "Basic"
+    priority = 120
+    http_listener_name = "listener-django"
+    backend_address_pool_name = "appgw-backend-pool"
+    backend_http_settings_name = "http-settings-django"
   }
 }

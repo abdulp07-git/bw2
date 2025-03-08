@@ -31,3 +31,13 @@ spec:
             name: kube-prometheus-stack-grafana
             port: 
               number: 80
+  - host: django.intodepth.com
+    http:
+      paths: 
+      - path: / 
+        pathType: Prefix
+        backend:
+          service: 
+            name: mydjango
+            port: 
+              number: 8000
