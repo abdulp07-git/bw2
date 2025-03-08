@@ -20,14 +20,14 @@ pipeline {
         
         
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 git "https://github.com/abdulp07-git/bw2.git"
             }
         }
         
         
-        stage('Build infrastructure') {
+        stage('Terraform build') {
             steps {
                 script {
                     try {
@@ -67,7 +67,7 @@ pipeline {
         
         
 
-        stage('Unit Test') {
+        stage('Maven Test') {
             steps {
                 sh 'mvn -f application/pom.xml test'
             }
@@ -87,7 +87,7 @@ pipeline {
         }
 
         
-        stage('Build'){
+        stage('Build Artifact'){
             steps{
                 sh 'mvn -f application/pom.xml clean package'
                 
@@ -95,7 +95,7 @@ pipeline {
         }
         
         
-        stage("Build docker image"){
+        stage("Docker image"){
             steps {
                 script {
                     def dockerImage = "bw89acr.azurecr.io/bw2"
@@ -106,7 +106,7 @@ pipeline {
             }
         }
         
-        stage("PUSH TO ACR") {
+        stage("Push image to ACR") {
             steps {
                 script {
                     
@@ -134,7 +134,7 @@ pipeline {
         }
         
 
-        stage ("Update the configuration"){
+        stage ("Modify Configurations"){
             steps {
                 script {
                     sh """
@@ -147,7 +147,7 @@ pipeline {
 
         
         
-        stage ("Sync files to VM"){
+        stage ("Sync configs"){
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')]) {
                     sh """

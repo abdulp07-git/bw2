@@ -53,7 +53,6 @@ resource "azurerm_public_ip" "public_ip" {
   location = azurerm_resource_group.rg.location
   allocation_method = "Static"
 
-
 }
 
 resource "azurerm_network_interface" "bw_nic" {

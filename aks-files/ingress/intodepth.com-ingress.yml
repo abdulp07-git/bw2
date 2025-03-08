@@ -40,4 +40,4 @@ spec:
           service: 
             name: mydjango
             port: 
-              number: 8000
+              number: 8000  
